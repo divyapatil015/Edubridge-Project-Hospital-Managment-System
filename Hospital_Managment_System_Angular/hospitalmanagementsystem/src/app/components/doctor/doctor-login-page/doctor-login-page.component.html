@@ -1,0 +1,101 @@
+<section class="login-section">
+  <div class="login-card">
+    <div class="row">
+      <div class="col-lg-6 d-none d-lg-flex">
+        <img
+          src="assets/images/values.png"
+          alt="Doctor"
+          class="login-image"
+        />
+      </div>
+      <div class="col-lg-6">
+        <div class="login-form">
+          <h2 class="login-heading">Doctor Login</h2>
+          <form [formGroup]="doctorLoginForm" class="form">
+            <!-- Email input -->
+            <div class="form-group">
+              <label for="email" class="form-label">Email address</label>
+              <input
+                type="email"
+                id="email"
+                formControlName="email"
+                class="form-control"
+                required
+              />
+              <div
+                *ngIf="
+                  doctorLoginForm.controls['email'].invalid &&
+                  (doctorLoginForm.controls['email'].dirty ||
+                    doctorLoginForm.controls['email'].touched)
+                "
+                class="error-message"
+              >
+                <div
+                  *ngIf="doctorLoginForm.controls['email'].errors?.['required']"
+                >
+                  Email should not be blank
+                </div>
+                <div
+                  *ngIf="doctorLoginForm.controls['email'].errors?.['pattern']"
+                >
+                  Enter a valid email
+                </div>
+              </div>
+            </div>
+
+            <!-- Password input -->
+            <div class="form-group">
+              <label for="password" class="form-label">Password</label>
+              <input
+                type="password"
+                formControlName="password"
+                class="form-control"
+                required
+              />
+              <div
+                *ngIf="
+                  doctorLoginForm.controls['password'].invalid &&
+                  (doctorLoginForm.controls['password'].dirty ||
+                    doctorLoginForm.controls['password'].touched)
+                "
+                class="error-message"
+              >
+                <div
+                  *ngIf="doctorLoginForm.controls['password'].errors?.['required']"
+                >
+                  Password should not be blank
+                </div>
+                <div
+                  *ngIf="doctorLoginForm.controls['password'].errors?.['minlength']"
+                >
+                  Minimum 8 characters required
+                </div>
+              </div>
+            </div>
+
+            <!-- Forgot password link -->
+            <div class="forgot-password">
+              <a routerLink="/forgot-password">Forgot password?</a>
+            </div>
+
+            <!-- Sign in button -->
+            <button
+              type="button"
+              (click)="signIn()"
+              class="btn btn-primary btn-block"
+              [disabled]="!doctorLoginForm.valid"
+            >
+              Sign in
+            </button>
+          </form>
+
+          <!-- New user registration and sign up link -->
+          <div class="register-link">
+            Don't have an account yet?
+            <a routerLink="/doctor-register">Sign up Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
